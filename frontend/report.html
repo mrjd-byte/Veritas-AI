@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Incident Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <linearGradient id="score-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+    </svg>
+
+    <!-- Global Full Page container override for the Report viewer -->
+    <div class="app-container" style="max-width: 1000px; margin: 0 auto; display:block;">
+        
+        <header class="app-header" style="margin-bottom: 2rem;">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                <h1>Final Compiled Report</h1>
+            </div>
+
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Back to Dashboard</a>
+                <a href="interrogation.html" class="nav-link">Restart Follow-up</a>
+                <a href="history.html" class="nav-link">History</a>
+            </nav>
+            
+            <div class="header-actions">
+                <button onclick="downloadReport()" class="secondary-btn" id="dlBtn">
+                    Download Report
+                </button>
+            </div>
+        </header>
+
+        <div class="results-grid active" id="reportGrid" style="display: none; grid-template-columns: repeat(2, 1fr);">
+            
+            <!-- Metadata & Confidence -->
+            <div class="card metric-card full-width" style="background: linear-gradient(135deg, rgba(6,78,59,0.7) 0%, rgba(15,23,42,0.8) 100%);">
+                <div class="card-header">
+                    <h3>Overall Detail Density</h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:-0.3rem;">Completeness of legally actionable facts.</p>
+                </div>
+                <div class="card-body">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="confidenceRing" stroke="url(#score-gradient)" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="percentage" id="confidence" style="background: linear-gradient(to right, #fff, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">--%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="card full-width summary-card">
+                <div class="card-header">
+                    <h3 style="color: #34d399">Synthesis Summary</h3>
+                </div>
+                <div class="card-body">
+                    <p id="summary" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary);"></p>
+                </div>
+            </div>
+
+            <!-- Key Events -->
+            <div class="card full-width">
+                <div class="card-header">
+                    <h3>Key Authenticated Events</h3>
+                </div>
+                <div class="card-body">
+                    <ul id="keyEvents" class="data-list"></ul>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="card">
+                <div class="card-header"><h3>Compiled Timeline</h3></div>
+                <div class="card-body"><ul id="timeline" class="data-list"></ul></div>
+            </div>
+
+            <!-- People -->
+            <div class="card">
+                <div class="card-header"><h3>People Identified</h3></div>
+                <div class="card-body"><div id="people" class="tag-container"></div></div>
+            </div>
+
+            <!-- Locations -->
+            <div class="card">
+                <div class="card-header"><h3>Locations</h3></div>
+                <div class="card-body"><div id="locations" class="tag-container"></div></div>
+            </div>
+
+            <!-- Uncertainty -->
+            <div class="card warning-card">
+                <div class="card-header"><h3>Uncertainty Flags</h3></div>
+                <div class="card-body"><ul id="uncertainty" class="data-list warning-list"></ul></div>
+            </div>
+
+            <!-- Missing -->
+            <div class="card error-card">
+                <div class="card-header"><h3>Missing Information</h3></div>
+                <div class="card-body"><ul id="missing" class="data-list error-list"></ul></div>
+            </div>
+            
+        </div>
+        
+        <div id="noDataMessage" style="text-align: center; padding: 4rem; color: var(--text-secondary);">
+            <h2>No report data found!</h2>
+            <p>Go back to the Compassionate Follow-up tool to generate a new report.</p>
+        </div>
+
+    </div>
+
+    <script src="auth/auth.js"></script>
+    <script src="report.js"></script>
+    <script>checkAuth();</script>
+</body>
+</html>

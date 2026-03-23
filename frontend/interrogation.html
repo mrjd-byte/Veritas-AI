@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compassionate Follow-up</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .qa-input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <linearGradient id="brand-gradient-svg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1" />
+            <stop offset="100%" stop-color="#d946ef" />
+        </linearGradient>
+    </svg>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                <h1>Compassionate Follow-up</h1>
+            </div>
+
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Analyze</a>
+                <a href="interrogation.html" class="nav-link active">Compassionate Follow-up</a>
+                <a href="history.html" class="nav-link">History</a>
+                <a href="report.html" class="nav-link" style="display: none;" id="navReportLink">Report</a>
+            </nav>
+
+            <div class="header-actions">
+                <button onclick="logout()" class="secondary-btn">Logout</button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <!-- Left Side: Input -->
+            <section class="input-section">
+                <div class="input-card glass-card">
+                    <label for="inputText" class="section-label">Target Testimony</label>
+                    <div class="textarea-wrapper">
+                        <textarea id="inputText" placeholder="Paste the testimony here to generate specific, gentle follow-up questions..."></textarea>
+                    </div>
+
+                    <button id="generateBtn" class="primary-btn">
+                        <span class="btn-text">Generate Questions</span>
+                        <div class="spinner" id="generateSpinner"></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Side: Results -->
+            <section class="results-section">
+                <!-- Starts active so layout doesn't look completely greyed out -->
+                <div class="results-grid active" style="grid-template-columns: 1fr;">
+                    
+                    <div class="card full-width summary-card">
+                        <div class="card-header">
+                            <h3>Follow-up Questions</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Container for the generated questions -->
+                            <div id="questionsList" class="qa-container">
+                                <p class="placeholder-text" style="background: none; animation: none; color: var(--text-secondary) !important; width: 100%;">Awaiting input. Enter testimony and click generate.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Final Report action -->
+                        <div class="card-footer" id="reportActionContainer" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <button id="generateReportBtn" class="primary-btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);">
+                                <span class="btn-text">Synthesize Final Report</span>
+                                <div class="spinner" id="reportSpinner"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="auth/auth.js"></script>
+    <script src="interrogation.js"></script>
+    <script>
+        checkAuth();
+    </script>
+</body>
+</html>

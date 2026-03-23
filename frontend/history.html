@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cases - Testimony Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .history-card {
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+        .history-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+        .history-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .history-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" style="max-width: 1200px; margin: 0 auto; display:block;">
+        
+        <header class="app-header" style="margin-bottom: 2.5rem;">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                <h1>Case History Archive</h1>
+            </div>
+
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Analyze</a>
+                <a href="interrogation.html" class="nav-link">Compassionate Follow-up</a>
+                <a href="history.html" class="nav-link active">History</a>
+            </nav>
+
+            <div class="header-actions">
+                <button onclick="logout()" class="secondary-btn">Logout</button>
+            </div>
+        </header>
+
+        <section id="loadingState" style="text-align: center; padding: 4rem;">
+            <div class="spinner" style="display: inline-block; position: relative; animation: spin 1s infinite linear;"></div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading your archives...</p>
+        </section>
+
+        <section id="emptyState" style="text-align: center; padding: 4rem; display: none;">
+            <h2 style="color: var(--text-primary); margin-bottom: 1rem;">No cases found!</h2>
+            <p style="color: var(--text-secondary);">You haven't analyzed or interrogated any testimonies yet.</p>
+        </section>
+
+        <div class="history-grid" id="historyGrid" style="display: none;">
+            <!-- Render dynamically -->
+        </div>
+
+    </div>
+
+    <script src="auth/auth.js"></script>
+    <script src="history.js"></script>
+    <script>checkAuth();</script>
+</body>
+</html>

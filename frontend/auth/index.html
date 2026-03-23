@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimony Analyzer - Main App</title>
+    <!-- Import Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Auth protection check runs immediately -->
+    <script src="auth/auth.js"></script>
+    <script>
+        checkAuth(); // Redirects to login instantly if no token is found
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #121826;
+            --text-main: #f8fafc;
+            --primary: #8b5cf6;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+        }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+        .logout-btn {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .logout-btn:hover {
+            background-color: rgba(255,255,255,0.05);
+            border-color: var(--text-main);
+        }
+        .dashboard {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            min-height: 50vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-header">
+        <h1>Testimony Analyzer</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    
+    <div class="dashboard">
+        <h2>Welcome to the Analyzer!</h2>
+        <p style="color: #94a3b8; margin-top: 1rem;">This is your protected main application. You are currently logged in with a valid token.</p>
+        <!-- Your main app content goes here -->
+    </div>
+</body>
+</html>

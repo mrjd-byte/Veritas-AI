@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trauma-Aware Testimony Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <linearGradient id="brand-gradient-svg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1" />
+            <stop offset="100%" stop-color="#d946ef" />
+        </linearGradient>
+        <linearGradient id="score-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d946ef" />
+            <stop offset="100%" stop-color="#3b82f6" />
+        </linearGradient>
+    </svg>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                <h1>Testimony Analyzer</h1>
+            </div>
+
+            <nav class="main-nav">
+                <!-- CHANGED: Replaced disabled Interrogation span with actual link to interrogation.html -->
+                <a href="index.html" class="nav-link active">Analyze</a>
+                <a href="interrogation.html" class="nav-link">Compassionate Follow-up</a>
+                <a href="history.html" class="nav-link">History</a>
+            </nav>
+
+            <div class="header-actions">
+                <button id="downloadBtn" class="secondary-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                    Download JSON
+                </button>
+                <button onclick="logout()" class="secondary-btn">
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <!-- Left Side: Input -->
+            <section class="input-section">
+                <div class="input-card glass-card">
+                    <label for="inputText" class="section-label">Analyze Testimony</label>
+                    <div class="textarea-wrapper">
+                        <textarea id="inputText"
+                            placeholder="Paste or type the testimony here. The AI will securely process and extract structured insights based on trauma-aware models..."></textarea>
+                    </div>
+
+                    <button id="analyzeBtn" class="primary-btn">
+                        <span class="btn-text">Extract Insights</span>
+                        <div class="spinner" id="analyzeSpinner"></div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Side: Results -->
+            <section class="results-section">
+                <div class="results-grid">
+
+                    <!-- Detail Density (Top Metric) -->
+                    <div class="card metric-card">
+                        <div class="card-header">
+                            <h3>Detail Density</h3><br>
+                            <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:-0.5rem; margin-bottom:1rem;">Structural completeness of legally actionable facts.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="score-circle">
+                                <svg viewBox="0 0 36 36" class="circular-chart">
+                                    <path class="circle-bg"
+                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" id="confidenceRing" stroke-dasharray="0, 100"
+                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                </svg>
+                                <div class="percentage" id="confidence">--%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="card full-width summary-card">
+                        <div class="card-header">
+                            <h3>Summary</h3>
+                        </div>
+                        <div class="card-body">
+                            <p id="summary" class="placeholder-text">Awaiting input. Enter testimony to generate an AI
+                                summary.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Events -->
+                    <div class="card full-width">
+                        <div class="card-header">
+                            <h3>Key Events</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="keyEvents" class="data-list placeholder-list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Timeline</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="timeline" class="data-list placeholder-list">
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- People -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>People Identified</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="people" class="tag-container placeholder-tags">
+                                <span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Locations -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Locations</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="locations" class="tag-container placeholder-tags">
+                                <span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uncertainty Flags -->
+                    <div class="card warning-card">
+                        <div class="card-header">
+                            <h3>Uncertainty Flags</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="uncertainty" class="data-list warning-list placeholder-list">
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Missing Info -->
+                    <div class="card error-card">
+                        <div class="card-header">
+                            <h3>Missing Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="missing" class="data-list error-list placeholder-list">
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="auth/auth.js"></script>
+    <script src="app.js"></script>
+    
+    <script>
+        checkAuth();
+    </script>
+</body>
+
+</html>
