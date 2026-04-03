@@ -1,4 +1,4 @@
-<img width="489" height="279" alt="image" src="https://github.com/user-attachments/assets/cc092057-0b35-4d0b-8054-6126d6ac9fa3" /># 🧠 Veritas AI
+# 🧠 Veritas AI
 
 **Veritas AI** is a trauma-aware, AI-powered testimony analysis platform designed to help analysts and investigators extract structured, legally actionable insights from witness statements — with sensitivity to trauma-affected recall.
 
