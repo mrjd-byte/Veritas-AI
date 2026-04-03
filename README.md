@@ -1,4 +1,4 @@
-# 🧠 Veritas AI
+<img width="489" height="279" alt="image" src="https://github.com/user-attachments/assets/cc092057-0b35-4d0b-8054-6126d6ac9fa3" /># 🧠 Veritas AI
 
 **Veritas AI** is a trauma-aware, AI-powered testimony analysis platform designed to help analysts and investigators extract structured, legally actionable insights from witness statements — with sensitivity to trauma-affected recall.
 
@@ -70,6 +70,7 @@ Veritas-AI/
 ### 📌 Prerequisites
 
 * Python 3.10+
+* FastAPI
 * OpenRouter API key
 
 ---
@@ -98,7 +99,12 @@ pip install -r requirements.txt
 echo "OPENROUTER_API_KEY=your_key_here" > .env
 
 # 5. Run the server
-python -m backend.main
+Backend:
+uvicorn backend.main:app --reload
+
+Frontend:
+cd frontend
+python -m http.server 5500
 ```
 
 ---
