@@ -57,7 +57,7 @@ Veritas-AI/
 │   ├── history.js
 │   ├── report.js
 │   ├── styles.css
-│   └── auth/                # Auth helpers
+│   └── auth/               
 │
 ├── requirements.txt
 └── .env
@@ -87,7 +87,7 @@ python -m venv env
 
 # Activate environment
 # Windows:
-env\Scripts\activate
+env/Scripts/activate
 
 # Mac/Linux:
 source env/bin/activate
