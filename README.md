@@ -112,7 +112,7 @@ python -m http.server 5500
 ### 🌐 Usage
 
 * API runs at: `http://localhost:8000`
-* Open frontend: `frontend/index.html`
+* Open frontend: `http://localhost:5000`
 
 ---
 
